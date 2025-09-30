@@ -6,13 +6,21 @@
     async function updateData() {
       const res = await fetch("/data");
       const json = await res.json();
-      document.getElementById("temp").innerText = json.temperature.toFixed(2);
+
+      if (json.error) {
+        document.getElementById("temp").innerText = "Error";
+        document.getElementById("hum").innerText = "Error";
+      } else {
+        document.getElementById("temp").innerText = json.temperature.toFixed(1);
+        document.getElementById("hum").innerText = json.humidity.toFixed(1);
+      }
     }
-    setInterval(updateData, 2000); // update every 2s
+    setInterval(updateData, 2000);
   </script>
 </head>
 <body>
-  <h1>Raspberry Pi Dashboard</h1>
-  <p>Temperature: <span id="temp">--</span> °C</p>
+  <h1>🌱 Raspberry Pi Dashboard</h1>
+  <p>🌡️ Temperature: <span id="temp">--</span> °C</p>
+  <p>💧 Humidity: <span id="hum">--</span> %</p>
 </body>
 </html>
