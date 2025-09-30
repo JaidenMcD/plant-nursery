@@ -1,0 +1,42 @@
+:root {
+    /** Primary color for the theme */
+    --themePrimary: #edbebf;
+
+    /** Secondary (foreground) color for the theme */
+    --neutralPrimary: #f0f0f0;
+
+    /** Background color for the theme */
+    --backgroundColor: #245c11;
+}
+
+body {
+    background-color: var(--backgroundColor);
+    color: var(--neutralPrimary);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#title-div {
+    color: var(--neutralPrimary);
+    height: 10%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#content-div {
+    margin: 20px;
+    border: var(--neutralPrimary) 2px solid;
+    height: 85vh;
+}
+
+#live-monitor-div {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -6,99 +6,16 @@
     <title>Plant Nursery</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>DHT Sensor Dashboard</h2>
-    <p>Temperature and Humidity readings in real-time</p>
-
-    <canvas id="tempChart" width="400" height="200"></canvas>
-    <canvas id="humChart" width="400" height="200" style="margin-top: 20px;"></canvas>
-
-    <script>
-        // Setup Chart.js line charts
-        const tempCtx = document.getElementById('tempChart').getContext('2d');
-        const humCtx = document.getElementById('humChart').getContext('2d');
-
-        const tempChart = new Chart(tempCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Temperature (°C)',
-                    data: [],
-                    borderColor: 'rgb(255, 99, 132)',
-                    fill: false,
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                animation: false,
-                scales: {
-                    x: { title: { display: true, text: 'Time' } },
-                    y: { title: { display: true, text: '°C' } }
-                }
-            }
-        });
-
-        const humChart = new Chart(humCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Humidity (%)',
-                    data: [],
-                    borderColor: 'rgb(54, 162, 235)',
-                    fill: false,
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                animation: false,
-                scales: {
-                    x: { title: { display: true, text: 'Time' } },
-                    y: { title: { display: true, text: '%' } }
-                }
-            }
-        });
-
-        // Poll Flask API every 2 seconds
-        async function fetchData() {
-            try {
-                const response = await fetch('/data');
-                const data = await response.json();
-
-                if (!data.error) {
-                    const now = new Date().toLocaleTimeString();
-
-                    // Update charts
-                    tempChart.data.labels.push(now);
-                    tempChart.data.datasets[0].data.push(data.temperature);
-
-                    humChart.data.labels.push(now);
-                    humChart.data.datasets[0].data.push(data.humidity);
-
-                    // Keep only last 20 points
-                    if (tempChart.data.labels.length > 20) {
-                        tempChart.data.labels.shift();
-                        tempChart.data.datasets[0].data.shift();
-                    }
-                    if (humChart.data.labels.length > 20) {
-                        humChart.data.labels.shift();
-                        humChart.data.datasets[0].data.shift();
-                    }
-
-                    tempChart.update();
-                    humChart.update();
-                }
-            } catch (err) {
-                console.error("Fetch error:", err);
-            }
-        }
-
-        setInterval(fetchData, 2000);
-    </script>
+  <div id="title-div"><h1>Plant Nursery</h1></div>
+  <div id="content-div">
+    <div id="live-monitor-div">
+      <span id="temp"> Current Temperature : </span>
+      <span id="hum"> Current Humidity : </span>
+    </div>
+  </div>
 </body>
+<script src="script.js"></script>
 </html>
