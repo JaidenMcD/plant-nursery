@@ -6,7 +6,7 @@ import board
 app = Flask(__name__)
 
 # Initialize the DHT device (using GPIO18 = physical pin 12)
-dhtDevice = adafruit_dht.DHT11(board.D18, use_pulseio=False)
+dhtDevice = adafruit_dht.DHT11(board.D18)
 
 @app.route("/")
 def dashboard():
