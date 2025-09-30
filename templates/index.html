@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RPi Sensor Dashboard</title>
+  <script>
+    async function updateData() {
+      const res = await fetch("/data");
+      const json = await res.json();
+      document.getElementById("temp").innerText = json.temperature.toFixed(2);
+    }
+    setInterval(updateData, 2000); // update every 2s
+  </script>
+</head>
+<body>
+  <h1>Raspberry Pi Dashboard</h1>
+  <p>Temperature: <span id="temp">--</span> °C</p>
+</body>
+</html>
