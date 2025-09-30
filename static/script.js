@@ -3,7 +3,7 @@ async function updateDHT11() {
     const response = await fetch('/data');
     const data = await response.json();
 
-    if (json.error) {
+    if (data.error) {
         return;
     }
     else {
